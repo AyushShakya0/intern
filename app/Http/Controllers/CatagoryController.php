@@ -13,7 +13,7 @@ class CatagoryController extends Controller
         return view('catagory.index',compact('catagory'));
     }
     public function showcreate(){
-        
+
         return view('catagory.create');
     }
 
@@ -35,7 +35,7 @@ class CatagoryController extends Controller
         }
         // $catagory=Catagory::all();
         // return redirect()->route('catagory',compact('catagory'))->with(["delete"=>"Deleted Data Successfully"]);
-        // return redirect()->route('catagory.create');
+        return redirect()->route('catagory');
     }
 
     public function update($id){

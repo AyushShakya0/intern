@@ -26,7 +26,7 @@ class PostApiController extends Controller
                 'password'=>Hash::make($userdata['password']),
             ]);
             return response()->json([
-                "message"=>"User Signup Successfully",
+                "message"=>"User Signup Successful",
                 "user"=>$user
             ]);
         }
@@ -35,28 +35,28 @@ class PostApiController extends Controller
         }
     }
     public function loginUser(Request $request){
-       
+
        try {
         $user_login_data=$request->validate([
             'email'=>'required',
             'password'=>'required|min:8'
         ]);
         $user = User::where('email', $user_login_data['email'])->first();
-                           
+
         if($user&&Hash::check($user_login_data['password'], $user->password)){
            $token=$user->createToken('user-token')->accessToken;
            return response()->json([
-            "message"=>"login Successfull",
+            "message"=>"login Successful",
             "token"=>$token
            ]);
 
         }else{
             return response()->json([
-                "message"=>"login Unsuccessfull",
-    
+                "message"=>"Invalid credentials",
+
                ]);
         }
-        
+
        } catch (Exception $e) {
         return response()->json([$e->getMessage()]);
        }
@@ -75,14 +75,14 @@ class PostApiController extends Controller
             $postdata=Post::findOrFail($id);
             if($postdata){
                 return response()->json(["data"=>$postdata]);
-                
+
             }else{
                 return response()->json(["message"=>"Data not found"]);
             }
         }catch(Exception $e){
             return response()->json([$e->getMessage()]);
         }
-       
+
     }
 
 
@@ -107,7 +107,7 @@ class PostApiController extends Controller
                     'catagory' => 'required',
                     'image' => 'sometimes|max:2048',
                 ]);
-                
+
             if ($request->hasFile('images')) {
                 $images = $request->images;
                 $imageName = rand(1, 1000) . time() . '.' . $images->extension();
@@ -146,12 +146,12 @@ class PostApiController extends Controller
                 if(file_exists(public_path('images/' . $post->image))){
                     unlink(public_path('images/' . $post->image));
                 }
-                
+
             } else {
                 $imageName = $post->image;
             }
 
-         
+
                 $post->update([
                     'title' => $request->title,
                     'content' => $request->content,

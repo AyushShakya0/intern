@@ -8,6 +8,9 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
+                                <a class="nav-link" href="{{ route('home') }}">Home</a>
+                            </li>
+                            <li class="nav-item active">
                                 <a class="nav-link" href="#">Post</a>
                             </li>
                             <li class="nav-item">
@@ -60,11 +63,11 @@
                                 @foreach ($item->postimage as $images)
                                 <img src="{{ asset('images/'.$images->images) }}" alt="{{ $item->title }}" width="100" height="100">
                                 @endforeach
-                                
+
                                 @else
                                 <img src="" alt=""  width="100" height="100">
                                 @endif
-                                
+
                             </td>  --}}
 
                                 <td>
@@ -101,7 +104,7 @@
 
 
 
-            //create post 
+            //create post
             $('.post_create').submit(function(e) {
                 e.preventDefault();
                 const formdata = new FormData(this);
@@ -138,7 +141,7 @@
             function pageRelod(serverdata) {
                 let i = 1;
                 let data = serverdata.map((data) => {
-                    return `<tr> 
+                    return `<tr>
                                 <td>${i++}</td>
                                 <td>${data.title}</td>
                                 <td>${data.content}</td>
@@ -150,9 +153,9 @@
                                     <a name="edit" class="btn btn-primary update-btn" id="${data.id}" role="button" data-bs-toggle="modal"
                                     data-bs-target="#updateModal">Edit</a>
                                     <button type="button" class="btn btn-danger delete-button"id="${data.id}">Delete</button>
-                                
+
                                 </td>
-                                
+
                             </tr>`
                 });
 
@@ -168,7 +171,7 @@
 
             //for deleting the data
 
-            //event delegation when the button is dynamically added this event listener will not work 
+            //event delegation when the button is dynamically added this event listener will not work
 
             //so use already  existed element when the page was initially loaded in this casse tbody
             $('tbody').on('click', '.delete-button', function() {

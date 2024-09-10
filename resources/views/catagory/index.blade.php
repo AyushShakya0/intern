@@ -23,7 +23,10 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="{{ route('catagory') }}">Catagory</a>
+                                <a class="nav-link" href="{{ route('home') }}">Home</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{{ route('catagory') }}">Category</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('catagory.index') }}">Create</a>
@@ -36,7 +39,7 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">S.N</th>
-                            <th scope="col">Catagory</th>
+                            <th scope="col">Category</th>
                             <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -49,7 +52,7 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $item->catagory }}</td>
-                                <td>{{ $item->status }}</td>
+                                <td>{{ $item->status ? 'Active' : 'Inactive'}}</td>
                                 <td>
                                     <a name="edit" id="" class="btn btn-primary"
                                         href="{{ url('/catagory/update/' . $item->id) }}" role="button">Edit</a>
