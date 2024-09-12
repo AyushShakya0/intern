@@ -25,11 +25,11 @@ Route::post('/login',[PostApiController::class,'loginUser']);
 
 
 Route::middleware('auth:api')->group(function () {
-    Route::get('/allpost', [PostApiController::class, 'getAllPost'])->middleware('can:view posts');
-    Route::get('/getpost/{id}', [PostApiController::class, 'showPost'])->middleware('can:view posts');
-    Route::put('/updatepost/{id}', [PostApiController::class, 'updatePost'])->middleware('can:update posts');
-    Route::post('/createpost', [PostApiController::class, 'createPost'])->middleware('can:create posts');
-    Route::delete('/deletepost/{id}', [PostApiController::class, 'deletePost'])->middleware('can:delete posts');
+    Route::get('/allpost', [PostApiController::class, 'getAllPost'])->middleware('role:reader');
+    Route::get('/getpost/{id}', [PostApiController::class, 'showPost'])->middleware('role:reader');
+    Route::put('/updatepost/{id}', [PostApiController::class, 'updatePost'])->middleware('role:editor');
+    Route::post('/createpost', [PostApiController::class, 'createPost'])->middleware('role:creator');
+    Route::delete('/deletepost/{id}', [PostApiController::class, 'deletePost'])->middleware('role:deleter');
 });
 
 
